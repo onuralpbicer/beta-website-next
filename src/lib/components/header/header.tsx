@@ -1,5 +1,6 @@
 import { IHeaderInfo, SupportedLocales } from '@beta/lib/contentful';
 import Link from 'next/link';
+import './header.scss';
 
 export default async function Header({
   headerInfo,
@@ -13,9 +14,14 @@ export default async function Header({
       ? SupportedLocales.Turkish
       : SupportedLocales.English;
 
+  const toLocaleName =
+    toLocale === SupportedLocales.English ? 'English' : 'Türkçe';
+
   return (
     <header>
-      <img className="logo" src={headerInfo.logo} alt="logo" />
+      <Link href={'/' + locale + '/home'}>
+        <img className="logo" src={headerInfo.logo} alt="logo" />
+      </Link>
 
       <nav aria-label="Header tabs">
         {headerInfo.headerLinks.map((link) => (
@@ -27,7 +33,7 @@ export default async function Header({
 
       <div className="spacer" aria-hidden="true"></div>
 
-      <Link href={'/' + toLocale + '/home'}>{toLocale}</Link>
+      <Link href={'/' + toLocale + '/home'}>{toLocaleName}</Link>
 
       {/* todo mobile menu */}
     </header>
