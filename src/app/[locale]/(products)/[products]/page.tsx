@@ -6,7 +6,7 @@ export async function generateStaticParams() {
         },
         {
             locale: 'tr-TR',
-            products: 'hakkimizda',
+            products: 'urunler',
         }
     ]
 }
@@ -15,7 +15,7 @@ export default function TestPage() {
     return (
         <div>
             <main>
-                about us page
+                products page
             </main>
         </div>
     );

@@ -1,15 +1,20 @@
+import {loadHomePage} from '@beta/lib/contentful.client'
+import {SupportedLocales} from "@beta/lib/contentful";
+
 export async function generateStaticParams() {
-    return ['tr-TR' , 'en-US'].map((locale) => ({
+    return ['tr-TR', 'en-US'].map((locale) => ({
         locale
     }))
 }
 
-export default function TestPage() {
-  return (
-    <div>
-        <main>
-            home page
-        </main>
-    </div>
-  );
+export default async function TestPage({params}: { params: Promise<{ locale: SupportedLocales }> }) {
+    const {locale} = await params
+    const page = await loadHomePage(locale)
+    return (
+        <div>
+            <main>
+                home page {JSON.stringify(page)}
+            </main>
+        </div>
+    );
 }
