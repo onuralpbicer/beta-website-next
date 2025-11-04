@@ -1,0 +1,6 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+  "postCreateCommand": "npm install",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [22, 3000, 8080]
+}
