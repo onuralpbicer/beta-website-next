@@ -16,7 +16,7 @@ export default async function RootLayout({
   return (
     <React.Fragment>
       <Header headerInfo={headerInfo} locale={locale} />
-      {children}
+      <main>{children}</main>
       <div>footer</div>
     </React.Fragment>
   );
