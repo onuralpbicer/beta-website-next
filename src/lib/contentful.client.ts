@@ -1,5 +1,12 @@
 import {createClient, EntrySkeletonType} from "contentful";
-import {IContentfulEntries, IHomePageFields, IHomePageInfo, IWhyUsFields, SupportedLocales} from "@beta/lib/contentful";
+import {
+    IAppHeaderFields,
+    IContentfulEntries, IHeaderInfo,
+    IHomePageFields,
+    IHomePageInfo, IPageFields,
+    IWhyUsFields,
+    SupportedLocales
+} from "@beta/lib/contentful";
 
 const contentDeliveryToken = process.env['CONTENTFUL_DELIVERY_TOKEN']!;
 const contentPreviewToken = process.env['CONTENTFUL_PREVIEW_TOKEN']!;
@@ -38,3 +45,27 @@ export async function loadHomePage(locale: SupportedLocales): Promise<IHomePageI
         whyUs: whyUs.map((entry) => entry.fields),
     };
 }
+
+
+export async function loadHeaderInformation(locale: SupportedLocales): Promise<IHeaderInfo> {
+    const header = await contentfulClient.getEntry<
+        EntrySkeletonType<IAppHeaderFields>
+    >(IContentfulEntries.AppHeader, {
+        locale,
+    });
+
+    const [logoAsset, ...headerLinks] = await Promise.all(
+        [contentfulClient.getAsset(header.fields.logo.sys.id),
+            ...header.fields.headerLinks.map((link) =>
+                contentfulClient.getEntry<EntrySkeletonType<IPageFields>>(link.sys.id, {
+                    locale,
+                }),
+            ),]
+    );
+
+    return {
+        ...header.fields,
+        logo: logoAsset.fields.file!.url, // todo fix
+        headerLinks: headerLinks.map((link) => link.fields),
+    };
+};

@@ -1,11 +1,13 @@
+import {SupportedLocales} from "@beta/lib/contentful";
+
 export async function generateStaticParams() {
     return [
         {
-            locale: 'en-US',
+            locale: SupportedLocales.English,
             products: 'products',
         },
         {
-            locale: 'tr-TR',
+            locale: SupportedLocales.Turkish,
             products: 'urunler',
         }
     ]

@@ -2,7 +2,7 @@ import {loadHomePage} from '@beta/lib/contentful.client'
 import {SupportedLocales} from "@beta/lib/contentful";
 
 export async function generateStaticParams() {
-    return ['tr-TR', 'en-US'].map((locale) => ({
+    return [SupportedLocales.Turkish, SupportedLocales.English].map((locale) => ({
         locale
     }))
 }
