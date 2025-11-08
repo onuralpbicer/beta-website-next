@@ -1,6 +1,8 @@
 import { IHeaderInfo, SupportedLocales } from '@beta/lib/contentful';
 import Link from 'next/link';
 import './header.scss';
+import { IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default async function Header({
   headerInfo,
@@ -35,6 +37,9 @@ export default async function Header({
 
       <Link href={'/' + toLocale + '/home'}>{toLocaleName}</Link>
 
+      <IconButton className="menu">
+        <MenuIcon />
+      </IconButton>
       {/* todo mobile menu */}
     </header>
   );

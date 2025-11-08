@@ -21,8 +21,20 @@ header {
   }
 
   > nav {
+    display: none;
+    @media (min-width: 599px) {
+      display: block;
+    }
+
     > a {
       margin-left: .5rem;
     }
+  }
+
+  .menu {
+    @media (min-width: 599px) {
+      display: none;
+    }
+
   }
 }
