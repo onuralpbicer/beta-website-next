@@ -1,6 +1,8 @@
 import { IHeaderInfo, SupportedLocales } from '@beta/lib/contentful';
 import Link from 'next/link';
 import './header.scss';
+import { Popover } from '@beta/lib/components/Popover';
+import { Icon } from '@beta/lib/components/Icon';
 
 export default async function Header({
   headerInfo,
@@ -36,6 +38,9 @@ export default async function Header({
       <Link href={'/' + toLocale + '/home'}>{toLocaleName}</Link>
 
       {/* todo mobile menu */}
+      <Popover trigger={<Icon>menu</Icon>}>
+        <div>testing</div>
+      </Popover>
     </header>
   );
 }
