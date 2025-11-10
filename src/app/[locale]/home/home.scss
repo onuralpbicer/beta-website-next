@@ -16,6 +16,7 @@ section {
     gap: 1rem;
     justify-content: center;
     align-items: flex-start;
+    flex-wrap: wrap;
 
     > * {
       flex: 1;
