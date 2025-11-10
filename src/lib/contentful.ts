@@ -1,9 +1,4 @@
-import {
-  Entry,
-  EntryFieldTypes,
-  EntrySkeletonType,
-  FieldsType,
-} from 'contentful';
+import { Entry, EntryFieldTypes, EntrySkeletonType, FieldsType, } from 'contentful';
 
 export enum IContentfulEntries {
   AppHeader = '6HdXki6dz7Z4s0hojQ358c',
@@ -21,7 +16,7 @@ export enum IContentfulEnvs {
 export type IContentfulEntry<
   T extends FieldsType,
   ID extends string = string,
-> = Entry<EntrySkeletonType<T, ID>, 'WITHOUT_LINK_RESOLUTION', string>;
+> = Entry<EntrySkeletonType<T, ID>, 'WITHOUT_UNRESOLVABLE_LINKS', string>;
 type ExtractType<T extends FieldsType> = IContentfulEntry<T>['fields'];
 
 export interface IProductFields {

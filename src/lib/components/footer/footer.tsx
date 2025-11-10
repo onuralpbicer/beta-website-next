@@ -1,26 +1,33 @@
 import React from 'react';
-import { IFooterInfo } from '@beta/lib/contentful';
+import { IFooter } from '@beta/lib/contentful';
 import css from './footer.module.scss';
 
-export async function Footer({ footer }: { footer: IFooterInfo }) {
+export async function Footer({ footer }: { footer: IFooter }) {
   const now = new Date();
 
-  console.log(footer);
   return (
     <div className={css.footer}>
       <div className={css.columns}>
-        {footer.footerColumns.map((column) => (
-          <div key={column.title}>
-            <h4>{column.title}</h4>
+        {footer.footerColumns.map((column) => {
+          console.log(
+            column?.fields.title,
+            JSON.stringify(column?.fields.links),
+          );
+          return (
+            <div key={column?.fields.title}>
+              <h4>{column?.fields.title}</h4>
 
-            {column.links.map((link, index) => (
-              <React.Fragment key={index}>
-                <span>{link.title}</span>
-                <br />
-              </React.Fragment>
-            ))}
-          </div>
-        ))}
+              {column?.fields.links.map((link, index) => {
+                return (
+                  <React.Fragment key={link?.sys.id}>
+                    <span>{link?.fields.title}</span>
+                    <br />
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
 
       <div className={css.copyright}>

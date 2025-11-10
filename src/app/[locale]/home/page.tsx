@@ -16,11 +16,11 @@ export default async function TestPage({
   params: Promise<{ locale: SupportedLocales }>;
 }) {
   const { locale } = await params;
-  const home = await loadHomePage(locale);
+  const home = await loadHomePage(locale).then((entry) => entry.fields);
   return (
     <React.Fragment>
       <section className="hero">
-        <img src={home.heroImage} alt="hero_image" />
+        <img src={home?.heroImage?.fields.file?.url} alt="hero_image" />
 
         <h1>{home.heroTitle}</h1>
         <p>{home.heroDescription}</p>
@@ -31,7 +31,7 @@ export default async function TestPage({
         <h2>{home.whyUsTitle}</h2>
         <div className="why-us-container">
           {home.whyUs.map((whyUs) => (
-            <WhyUs key={whyUs.title} whyUs={whyUs} />
+            <WhyUs key={whyUs?.fields.title} whyUs={whyUs!.fields} />
           ))}
         </div>
       </section>

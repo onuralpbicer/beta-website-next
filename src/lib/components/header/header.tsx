@@ -1,4 +1,4 @@
-import { IHeaderInfo, SupportedLocales } from '@beta/lib/contentful';
+import { IAppHeader, SupportedLocales } from '@beta/lib/contentful';
 import Link from 'next/link';
 import './header.scss';
 import { Popover } from '@beta/lib/components/Popover';
@@ -8,7 +8,7 @@ export default async function Header({
   headerInfo,
   locale,
 }: {
-  headerInfo: IHeaderInfo;
+  headerInfo: IAppHeader;
   locale: SupportedLocales;
 }) {
   const toLocale =
@@ -22,13 +22,17 @@ export default async function Header({
   return (
     <header>
       <Link href={'/' + locale + '/home'}>
-        <img className="logo" src={headerInfo.logo} alt="logo" />
+        <img
+          className="logo"
+          src={headerInfo.logo?.fields.file?.url}
+          alt="logo"
+        />
       </Link>
 
       <nav aria-label="Header tabs">
         {headerInfo.headerLinks.map((link) => (
-          <Link href={'../' + link.url} key={link.title}>
-            {link.title}
+          <Link href={'../' + link?.fields.url} key={link?.fields.title}>
+            {link?.fields.title}
           </Link>
         ))}
       </nav>
