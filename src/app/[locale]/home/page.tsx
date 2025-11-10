@@ -1,8 +1,8 @@
 import { loadHomePage } from '@beta/lib/contentful.client';
 import { SupportedLocales } from '@beta/lib/contentful';
 import './home.scss';
-import { Icon } from '@beta/lib/components/Icon';
 import React from 'react';
+import { WhyUs } from '@beta/lib/components/why-us/why-us';
 
 export async function generateStaticParams() {
   return [SupportedLocales.Turkish, SupportedLocales.English].map((locale) => ({
@@ -27,7 +27,14 @@ export default async function TestPage({
 
         <button>{home.linkText}</button>
       </section>
-      <Icon>menu</Icon>
+      <section>
+        <h2>{home.whyUsTitle}</h2>
+        <div className="why-us-container">
+          {home.whyUs.map((whyUs) => (
+            <WhyUs key={whyUs.title} whyUs={whyUs} />
+          ))}
+        </div>
+      </section>
     </React.Fragment>
   );
 }

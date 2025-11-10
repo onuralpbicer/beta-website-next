@@ -1,7 +1,9 @@
 import React from 'react';
 import { SupportedLocales } from '@beta/lib/contentful';
-import { loadHeaderInformation } from '@beta/lib/contentful.client';
+import { loadFooter, loadHeaderInformation } from '@beta/lib/contentful.client';
 import Header from '@beta/lib/components/header/header';
+import { Footer } from '@beta/lib/components/footer/footer';
+import './layout.scss';
 
 export default async function RootLayout({
   children,
@@ -13,11 +15,12 @@ export default async function RootLayout({
   const { locale } = (await params) as { locale: SupportedLocales };
 
   const headerInfo = await loadHeaderInformation(locale);
+  const footer = await loadFooter(locale);
   return (
-    <React.Fragment>
+    <div className="main-container">
       <Header headerInfo={headerInfo} locale={locale} />
       <main>{children}</main>
-      <div>footer</div>
-    </React.Fragment>
+      <Footer footer={footer} />
+    </div>
   );
 }

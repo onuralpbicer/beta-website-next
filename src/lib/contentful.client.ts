@@ -2,6 +2,9 @@ import { createClient, EntrySkeletonType } from 'contentful';
 import {
   IAppHeaderFields,
   IContentfulEntries,
+  IFooterColumnFields,
+  IFooterFields,
+  IFooterInfo,
   IHeaderInfo,
   IHomePageFields,
   IHomePageInfo,
@@ -72,5 +75,46 @@ export async function loadHeaderInformation(
     ...header.fields,
     logo: logoAsset.fields.file!.url, // todo fix
     headerLinks: headerLinks.map((link) => link.fields),
+  };
+}
+
+export async function loadFooter(
+  locale: SupportedLocales,
+): Promise<IFooterInfo> {
+  const footer = await contentfulClient.getEntry<
+    EntrySkeletonType<IFooterFields>
+  >(IContentfulEntries.Footer, {
+    locale,
+  });
+
+  const footerColumns = await Promise.all(
+    footer.fields.footerColumns.map(async (column) => {
+      const footerCol = await contentfulClient.getEntry<
+        EntrySkeletonType<IFooterColumnFields>
+      >(column.sys.id, {
+        locale,
+      });
+
+      const links = await Promise.all(
+        footerCol.fields.links.map((link) =>
+          contentfulClient.getEntry<EntrySkeletonType<IPageFields>>(
+            link.sys.id,
+            {
+              locale,
+            },
+          ),
+        ),
+      );
+
+      return {
+        ...footerCol.fields,
+        links: links.map((link) => link.fields),
+      };
+    }),
+  );
+
+  return {
+    ...footer.fields,
+    footerColumns,
   };
 }

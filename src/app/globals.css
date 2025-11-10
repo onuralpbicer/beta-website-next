@@ -1,8 +1,57 @@
 :root {
+    /* Brand Colors */
+    --primary-color: 11, 164, 255; /* #0BA4FF */
+    --color-primary: rgb(var(--primary-color));
+    --color-primary-light: #3fc0ff;
+    --color-primary-dark: #0087d9;
+    --color-primary-foreground: #ffffff;
+
+    --color-secondary: #035BB3;
+    --color-secondary-light: #0c73d1;
+    --color-secondary-dark: #024a93;
+    --color-secondary-foreground: #ffffff;
+
     --background: #ffffff;
     --foreground: #171717;
-    --primary-color: 11, 164, 255; /* #0BA4FF */
-    --primary: rgb(var(--primary-color));
+
+    /* Neutral Palette */
+    --color-bg: #ffffff;
+    --color-surface: #f9fafb;
+    --color-border: #e5e7eb;
+    --color-text: #1f2937;
+    --color-text-muted: #6b7280;
+
+    /* Semantic Colors */
+    --color-success: #16a34a;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+
+    /* Shadows & Borders */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+
+    /* Typography */
+    --font-family-sans: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+
+    /* Focus */
+    --focus-ring: 0 0 0 3px rgba(11, 164, 255, 0.35);
 }
 
 @media (prefers-color-scheme: dark) {

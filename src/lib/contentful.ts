@@ -10,6 +10,7 @@ export enum IContentfulEntries {
   AboutUs = '7EuN8NpkqQ3qen1o4GS3WK',
   ContactUs = '4PIESIC36bloQRBVPVO8ES',
   Home = '2DWaQQjSCRZGsFYUAONUqa',
+  Footer = '1pzdwAfzyJw5uF9yp2lwop',
 }
 
 export enum IContentfulEnvs {
@@ -152,4 +153,12 @@ export interface IHeaderInfo extends Omit<IAppHeader, 'logo' | 'headerLinks'> {
 export interface IHomePageInfo extends Omit<IHomePage, 'heroImage' | 'whyUs'> {
   heroImage: string;
   whyUs: IWhyUs[];
+}
+
+export interface IFooterColumnInfo extends Omit<IFooterColumn, 'links'> {
+  links: IPageLink[];
+}
+
+export interface IFooterInfo extends Omit<IFooter, 'footerColumns'> {
+  footerColumns: IFooterColumnInfo[];
 }

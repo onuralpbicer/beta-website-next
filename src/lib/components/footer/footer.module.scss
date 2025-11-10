@@ -1,0 +1,29 @@
+.footer {
+  background: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+
+  padding: 1rem 1rem 0.5rem;
+  @media (min-width: 599px) {
+    padding: 2rem 2rem 0.5rem;
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  > .columns {
+    flex-grow: 1;
+  }
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.copyright {
+  text-align: center;
+  grid-column: 1/-1;
+  font-size: small;
+}
