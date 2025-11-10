@@ -26,13 +26,18 @@ type ExtractType<T extends FieldsType> = IContentfulEntry<T>['fields'];
 
 export interface IProductFields {
   name: EntryFieldTypes.Text;
+  image: EntryFieldTypes.AssetLink;
 }
+export type IResolveImageField<T, K extends keyof T> = Record<K, string> &
+  Omit<T, K>;
 
 export type IProductEntry = IContentfulEntry<IProductFields>;
 export type IProduct = ExtractType<IProductFields>;
+export type IProductInfo = IResolveImageField<IProduct, 'image'>;
 
 export interface IProductSubCategoryFields {
   name: EntryFieldTypes.Text;
+  image: EntryFieldTypes.AssetLink;
   products: EntryFieldTypes.Array<
     EntryFieldTypes.EntryLink<EntrySkeletonType<IProductFields>>
   >;
@@ -41,9 +46,14 @@ export interface IProductSubCategoryFields {
 export type IProductSubCategoryEntry =
   IContentfulEntry<IProductSubCategoryFields>;
 export type IProductSubCategory = ExtractType<IProductSubCategoryFields>;
+export type IProductSubCategoryInfo = IResolveImageField<
+  IProductSubCategory,
+  'image'
+>;
 
 export interface IProductCategoryFields {
   name: EntryFieldTypes.Text;
+  image: EntryFieldTypes.AssetLink;
   subCategoryOrProducts: EntryFieldTypes.Array<
     EntryFieldTypes.EntryLink<
       EntrySkeletonType<IProductFields | IProductSubCategoryFields>
@@ -53,6 +63,10 @@ export interface IProductCategoryFields {
 
 export type IProductCategoryEntry = IContentfulEntry<IProductCategoryFields>;
 export type IProductCategory = ExtractType<IProductCategoryFields>;
+export type IProductCategoryInfo = IResolveImageField<
+  IProductCategory,
+  'image'
+>;
 
 export interface IPageFields {
   title: EntryFieldTypes.Text;
@@ -150,9 +164,16 @@ export interface IHeaderInfo extends Omit<IAppHeader, 'logo' | 'headerLinks'> {
   headerLinks: IPageLink[];
 }
 
-export interface IHomePageInfo extends Omit<IHomePage, 'heroImage' | 'whyUs'> {
+export type IFeaturedInfo =
+  | IProductCategoryInfo
+  | IProductSubCategoryInfo
+  | IProductInfo;
+
+export interface IHomePageInfo
+  extends Omit<IHomePage, 'heroImage' | 'whyUs' | 'featured'> {
   heroImage: string;
   whyUs: IWhyUs[];
+  featured: IFeaturedInfo[];
 }
 
 export interface IFooterColumnInfo extends Omit<IFooterColumn, 'links'> {

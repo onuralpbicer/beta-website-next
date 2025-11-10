@@ -5,7 +5,6 @@ import css from './footer.module.scss';
 export async function Footer({ footer }: { footer: IFooterInfo }) {
   const now = new Date();
 
-  console.log(footer);
   return (
     <div className={css.footer}>
       <div className={css.columns}>

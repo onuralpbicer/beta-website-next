@@ -9,6 +9,9 @@ import {
   IHomePageFields,
   IHomePageInfo,
   IPageFields,
+  IProductCategoryFields,
+  IProductFields,
+  IProductSubCategoryFields,
   IWhyUsFields,
   SupportedLocales,
 } from '@beta/lib/contentful';
@@ -46,10 +49,35 @@ export async function loadHomePage(
     ),
   );
 
+  const featured = await Promise.all(
+    home.fields.featured.map(async (entry) => {
+      const featuredType = await contentfulClient.getEntry<
+        EntrySkeletonType<
+          IProductCategoryFields | IProductSubCategoryFields | IProductFields
+        >
+      >(entry.sys.id, {
+        locale,
+      });
+
+      const asset = await contentfulClient.getAsset(
+        featuredType.fields.image.sys.id,
+        {
+          locale,
+        },
+      );
+
+      return {
+        ...featuredType.fields,
+        image: asset.fields.file?.url || '',
+      };
+    }),
+  );
+
   return {
     ...home.fields,
     heroImage: heroImage.fields.file!.url, // todo fix
     whyUs: whyUs.map((entry) => entry.fields),
+    featured,
   };
 }
 

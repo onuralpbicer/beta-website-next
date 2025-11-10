@@ -3,6 +3,7 @@ import { SupportedLocales } from '@beta/lib/contentful';
 import './home.scss';
 import React from 'react';
 import { WhyUs } from '@beta/lib/components/why-us/why-us';
+import { Featured } from '@beta/lib/components/featured/featured';
 
 export async function generateStaticParams() {
   return [SupportedLocales.Turkish, SupportedLocales.English].map((locale) => ({
@@ -26,6 +27,14 @@ export default async function TestPage({
         <p>{home.heroDescription}</p>
 
         <button>{home.linkText}</button>
+      </section>
+      <section>
+        <h2>{home.featuredTitle}</h2>
+        <div className="why-us-container">
+          {home.featured.map((featured) => (
+            <Featured key={featured.name} featured={featured} />
+          ))}
+        </div>
       </section>
       <section>
         <h2>{home.whyUsTitle}</h2>
