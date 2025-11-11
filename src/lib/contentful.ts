@@ -13,6 +13,10 @@ export enum IContentfulEntries {
   Footer = '1pzdwAfzyJw5uF9yp2lwop',
 }
 
+export enum IContentfulEntryTypes {
+  RichText = 'richTextPage',
+}
+
 export enum IContentfulEnvs {
   staging = 'staging',
   master = 'master',

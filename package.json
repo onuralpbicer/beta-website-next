@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve@latest out -l 3001",
     "lint": "eslint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.1.6",
     "contentful": "^11.8.10",
     "next": "16.0.1",
     "radix-ui": "^1.4.3",

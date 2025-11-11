@@ -2,6 +2,7 @@ import { createClient, EntrySkeletonType } from 'contentful';
 import {
   IAppHeaderFields,
   IContentfulEntries,
+  IContentfulEntryTypes,
   IFooterColumnFields,
   IFooterFields,
   IFooterInfo,
@@ -12,6 +13,7 @@ import {
   IProductCategoryFields,
   IProductFields,
   IProductSubCategoryFields,
+  IRichTextPageFields,
   IWhyUsFields,
   SupportedLocales,
 } from '@beta/lib/contentful';
@@ -145,4 +147,28 @@ export async function loadFooter(
     ...footer.fields,
     footerColumns,
   };
+}
+
+export async function loadRichTextPages(locale: SupportedLocales) {
+  const contentType = await contentfulClient.getEntries<
+    EntrySkeletonType<IRichTextPageFields>
+  >({
+    content_type: IContentfulEntryTypes.RichText,
+    locale,
+  });
+
+  return contentType.items;
+}
+
+export async function loadRichTextPage(locale: SupportedLocales, url: string) {
+  const result = await contentfulClient.getEntries<
+    EntrySkeletonType<IRichTextPageFields>
+  >({
+    locale,
+    limit: 1,
+    content_type: IContentfulEntryTypes.RichText,
+    'fields.url': url,
+  });
+
+  return result.items[0];
 }
