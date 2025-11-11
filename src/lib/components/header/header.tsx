@@ -27,7 +27,7 @@ export default async function Header({
 
       <nav aria-label="Header tabs">
         {headerInfo.headerLinks.map((link) => (
-          <Link href={'../' + link.url} key={link.title}>
+          <Link href={'/' + locale + '/' + link.url} key={link.title}>
             {link.title}
           </Link>
         ))}
